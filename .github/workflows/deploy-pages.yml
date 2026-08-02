@@ -2,7 +2,8 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ['feature/unified-prototype']
+    branches: ['feature/unified-prototype', 'main']
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -11,7 +12,7 @@ permissions:
 
 concurrency:
   group: 'pages'
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -23,10 +24,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'npm'
+          cache-dependency-path: prototype/package-lock.json
 
       - name: Install dependencies
         working-directory: ./prototype
-        run: npm ci
+        run: npm install
 
       - name: Build
         working-directory: ./prototype
