@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
 import AppLayout from '@/components/layout/AppLayout';
 import SapienceSetup from '@/pages/SapienceSetup';
@@ -53,10 +53,10 @@ function RoleRouter() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AuthProvider>
         <RoleRouter />
       </AuthProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
